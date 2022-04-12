@@ -23,11 +23,11 @@ export class WeatherService {
     return this.httpClient.get<any>(this.weatherApi, {params: {appid: this.apiKey, q: city}});
   }
 
-  validateEmail(city: string): Observable<ValidationErrors> {
+  validateCity(city: string): Observable<ValidationErrors> {
     return new Observable<ValidationErrors>(observer => {
       const date = JSON.parse(localStorage.getItem('arrayCity') as string)
-      const citys = date?.find((citys: any) => citys?.name?.toLowerCase() === city?.toLowerCase());
-      if (citys) {
+      const cityArray = date?.find((citys: any) => citys?.name?.toLowerCase() === city?.toLowerCase());
+      if (cityArray) {
         observer.next({
           nameError: 'email с таким именем уже существует'
         });

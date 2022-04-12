@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   nameAsyncValidator(control: FormControl | any): Observable<ValidationErrors> {
-    return this.weatherService.validateEmail(control.value.trim())
+    return this.weatherService.validateCity(control.value.trim())
   }
 
   getPosition() {
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   addCity(): void {
     this.weatherService.getWeatherOfTheCapitalCity(this.city.value.trim()).subscribe(res => {
-      if(this.city.errors?.['nameError']) {
+      if(this.validatorEmail) {
         this.toaster.error('уже сушествует город')
       } else {
         this.toaster.success('Add City')
