@@ -11,6 +11,7 @@ export class WeatherService {
   private baseUrl = environment.urlGeolocation;
   private apiKey = environment.apiKey;
   private weatherApi = environment.weatherApi;
+  public name!: string;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -26,7 +27,8 @@ export class WeatherService {
   validateCity(city: string): Observable<ValidationErrors> {
     return new Observable<ValidationErrors>(observer => {
       const date = JSON.parse(localStorage.getItem('arrayCity') as string)
-      const cityArray = date?.find((citys: any) => citys?.name?.toLowerCase() === city?.toLowerCase());
+      const cityArray = date?.find(({name}: any) => name?.toLowerCase() === city?.toLowerCase());
+      console.log(cityArray)
       if (cityArray) {
         observer.next({
           nameError: 'email с таким именем уже существует'

@@ -55,7 +55,8 @@ export class HomeComponent implements OnInit {
 
   addCity(): void {
     this.weatherService.getWeatherOfTheCapitalCity(this.city.value.trim()).subscribe(res => {
-      if(this.validatorEmail) {
+      const array = this.arrayCity.find(({id})=> id === res.id )
+      if(this.validatorEmail || array) {
         this.toaster.error('уже сушествует город')
       } else {
         this.toaster.success('Add City')
