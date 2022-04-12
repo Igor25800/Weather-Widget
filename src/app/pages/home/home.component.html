@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="card-weather">
+    <p class="card-title">{{weather?.name}}</p>
+    <img class="weather-img" [src]="iconDownload" alt="">
+    <span class="temp">{{(weather?.main?.temp)?.toFixed()}}ºC</span>
+    <span> {{weather?.wind?.speed}} m/s SW</span>
+    <span>{{weather?.main?.humidity}}: 10%</span>
+  </div>
+</div>
+
+<h1>Ведить Город</h1>
+<input [formControl]="city">
+<button (click)="addCity()">add</button>
+
+<div class="row">
+  <div class="container" *ngFor="let city of arrayCity  | paginate: { itemsPerPage: 5, currentPage: page }">
+    <div class="card-weather red">
+      <p class="card-title">{{city?.name}}</p>
+      <img class="weather-img" [src]="iconDownload" alt="">
+      <span class="temp">{{(city?.main?.temp - 273.15)?.toFixed() }}ºC</span>
+      <span> {{city?.wind?.speed}} m/s SW</span>
+      <span>{{city?.main?.humidity}}: 10%</span>
+    </div>
+    <div class="delete">
+      <button class="delete-btn" (click)="deleteCity(city)">Delete</button>
+    </div>
+  </div>
+</div>
+<div>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
